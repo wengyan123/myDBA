@@ -24,3 +24,48 @@ PURGE BINARY LOGS BEFORE now() - INTERVAL 3 day;
 show global status;
 
 show session status;
+
+--------------------------------------------
+-- INFORMATION_SCHEMA
+--------------------------------------------
+select table_name
+from information_schema.tables
+where table_schema = 'information_schema'
+order by table_name;
+
+select column_name
+from information_schema.columns
+where table_schema = 'information_schema'
+and table_name = 'VIEWS';
+
+-- Displays the storage engines used for the tables in a given database
+select table_name, engine
+from information_schema.tables
+where table_schema = 'world_innodb';
+
+-- displays the number of tables in each database
+select table_schema, count(*)
+from information_schema.tables
+group by table_schema;
+
+-- obtain metadata about database(schema)
+select * 
+from information_schema.schemata
+where schema_name = 'world_innodb';
+
+-- list number of tables, per storage engine, for each database(schema)
+select table_schema, engine, count(*)
+from information_schema.tables
+group by table_schema, engine;
+
+
+
+
+--------------------------------------------
+-- AUTOCOMMIT
+--------------------------------------------
+show global variables like 'AUTOCOMMIT';
+
+set global autocommit=0;
+
+

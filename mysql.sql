@@ -59,13 +59,24 @@ from information_schema.tables
 group by table_schema, engine;
 
 
-
-
 --------------------------------------------
 -- AUTOCOMMIT
 --------------------------------------------
 show global variables like 'AUTOCOMMIT';
 
+-- enable autocommit
+set global autocommit=1;
+
+-- disable autocommit
 set global autocommit=0;
 
+
+--------------------------------------------
+-- ISOLATION LEVEL
+--------------------------------------------
+-- read uncommitted
+-- read committed
+-- repeatable read
+-- serializable
+set session transaction isolation level read committed;
 
